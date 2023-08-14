@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1024 initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			font-family: helvetica, tahoma, sans-serif;
+		}
+
+	canvas { image-rendering: optimizeSpeed; 
+		image-rendering: -moz-crisp-edges; 
+		image-rendering: -webkit-optimize-contrast;  
+		image-rendering: -o-crisp-edges;  
+		image-rendering: optimize-contrast; 
+		-ms-interpolation-mode: nearest-neighbor;
+		display:block;
+		margin: 10px auto;
+		outline: 1px solid grey;
+	}
+	canvas:focus{
+		outline: 2px solid red;
+	}
+	body{
+		background-color:black;
+	}
+
+	</style>
+
+</head>
+<body>
+	<canvas id="c"></canvas>
+
+	<script type="text/javascript" src="script.js">	</script>
+	<script>
+		let g_InputManager = null;
+		
+		let cur_screen = new Main_Screen();
+
+		let g_ResourceManager = new ResourceManager();
+		g_ResourceManager.start_loading();
+
+		const MAX_VOLUME = 10;
+
+		function draw(){
+			cur_screen.draw(ctx);
+		}
+
+		setInterval(function(){draw()}, 30);
+	</script>
+	<audio src="audio/friday_startup.mp3" class="startup" onloadeddata="g_ResourceManager.cur_count++"></audio>
+	<audio src="audio/bgm.mp3" class="bgm" onloadeddata="g_ResourceManager.cur_count++"></audio>
+<!--	<audio src="/audio/startup.mp3" onloadeddata="g_ResourceManager.cur_count++" autoplay onpause="alert()"></audio>-->
+</body>
+</html>
